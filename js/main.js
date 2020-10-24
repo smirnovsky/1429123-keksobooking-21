@@ -46,7 +46,7 @@ var getUniqRandomArray = function (array, randomNumber) {
   return arr;
 };
 
-var getOpt = function (opt) {
+var getOption = function (opt) {
   var num = getRandom(opt);
   return opt[num];
 };
@@ -76,11 +76,11 @@ var getObjects = function () {
         title: TITLE,
         address: getAddress(getLocation(LOCATION_X_WIDTH, LOCATION_X_HEIGHT), getLocation(LOCATION_Y_MIN, LOCATION_Y_MAX)),
         price: PRICE,
-        type: getOpt(TYPE),
+        type: getOption(TYPE),
         rooms: ROOMS,
         guests: GUEST,
-        checkin: getOpt(CHECKIN_TIME),
-        checkout: getOpt(CHECKOUT_TIME),
+        checkin: getOption(CHECKIN_TIME),
+        checkout: getOption(CHECKOUT_TIME),
         features: getAddictions(FEATURES_MIN, FEATURES),
         description: DESCRIPTION,
         photos: getAddictions(PHOTOS_MIN, PHOTOS)
@@ -97,11 +97,11 @@ var getObjects = function () {
 var element = document.querySelector('.map');
 element.classList.remove('map--faded');
 
-var pinTemplate = document.querySelector('#pin')
+var getPinTemplate = document.querySelector('#pin')
   .content.querySelector('.map__pin');
 
-var dataItemFragment = function (item) {
-  var pin = pinTemplate.cloneNode(true);
+var getDataItemFragment = function (item) {
+  var pin = getPinTemplate.cloneNode(true);
   pin.style.left = item.location.x + 'px';
   pin.style.top = item.location.y + 'px';
   var img = pin.querySelector('img');
@@ -113,10 +113,10 @@ var dataItemFragment = function (item) {
 var renderPins = function () {
   var result = document.createDocumentFragment();
   for (var i = 0; i < getObjects().length; i++) {
-    result.appendChild(dataItemFragment(getObjects()[i]));
+    result.appendChild(getDataItemFragment(getObjects()[i]));
   }
   return result;
 };
 
-var pinContainerElem = element.querySelector('.map__pins');
-pinContainerElem.appendChild(renderPins());
+var pinContainerElement = element.querySelector('.map__pins');
+pinContainerElement.appendChild(renderPins());
