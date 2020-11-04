@@ -87,26 +87,25 @@ var getObjects = function () {
       },
       location: {
         x: getLocation(LOCATION_X_WIDTH, LOCATION_X_HEIGHT),
-        y:  getLocation(LOCATION_Y_MIN, LOCATION_Y_MAX)
+        y: getLocation(LOCATION_Y_MIN, LOCATION_Y_MAX)
       }
     };
   }
   return pins;
 };
 
-var openMap = function () {
-  element.classList.remove('map--faded');
-  formVision.classList.remove('ad-form--disabled');
-  mapVision.removeAttribute('disabled');
-  dellAttributeDisable(mapsFilters);
-  dellAttributeDisable(inputVision);
-};
+// var openMap = function () {
+//   element.classList.remove('map--faded');
+//   formVision.classList.remove('ad-form--disabled');
+//   mapVision.removeAttribute('disabled');
+//   dellAttributeDisable(mapsFilters);
+//   dellAttributeDisable(inputVision);
+// };
 
 var element = document.querySelector('.map');
 
 var formVision = document.querySelector('.ad-form');
 formVision.classList.add('ad-form--disabled');
-
 
 
 var getPinTemplate = document.querySelector('#pin')
