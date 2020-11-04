@@ -56,7 +56,7 @@ var getAddress = function (x, y) {
 };
 
 var getAddictions = function (min, addictions) {
-  var num = getRandomIntInclusive(min, addictions);
+  var num = getRandomIntInclusive(min, addictions.length);
   return getUniqRandomArray(addictions, num);
 };
 
@@ -177,9 +177,12 @@ var getCardItemFragment = function (item) {
 
   var photos = card.querySelector('.popup__photos');
   for (var i = 0; i < item.offer.photos.length; i++) {
-    var img = document.querySelectort('img');
-    img.classList.add('.popup__photo');
+    var img = document.createElement('img');
+    img.classList.add('popup__photo');
     img.src = item.offer.photos[i];
+    img.alt = 'Фотография жилья';
+    img.style.width = '45px';
+    img.style.height = '40px';
     photos.appendChild(img);
   }
   return card;
