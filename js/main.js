@@ -1,6 +1,7 @@
 'use strict';
 
 var ENTER_KEYCODE = 13;
+var MOUSEDOWN_KEY = 1;
 var TYPE = ['palace', 'flat', 'house', 'bungalow'];
 var CHECKIN_TIME = ['12:00', '13:00', '14:00'];
 var CHECKOUT_TIME = ['12:00', '13:00', '14:00'];
@@ -98,14 +99,14 @@ var getObjects = function () {
   return pins;
 };
 
-var setAttributeDisable = function (elem) {
-  for (var i = 0; i < elem.length; i++) {
-    elem[i].setAttribute('disabled', 'disabled');
+var setAttributeDisable = function (element) {
+  for (var i = 0; i < element.length; i++) {
+    element[i].setAttribute('disabled', 'disabled');
   }
 };
-var dellAttributeDisable = function (elem) {
-  for (var i = 0; i < elem.length; i++) {
-    elem[i].removeAttribute('disabled');
+var deleteAttributeDisable = function (element) {
+  for (var i = 0; i < element.length; i++) {
+    element[i].removeAttribute('disabled');
   }
 };
 
@@ -113,8 +114,8 @@ var openMap = function () {
   element.classList.remove('map--faded');
   formVision.classList.remove('ad-form--disabled');
   mapVision.removeAttribute('disabled');
-  dellAttributeDisable(mapsFilters);
-  dellAttributeDisable(inputVision);
+  deleteAttributeDisable(mapsFilters);
+  deleteAttributeDisable(inputVision);
 };
 
 
@@ -140,11 +141,15 @@ var adressDefaultX = xPin + (PIN_SIZE_X / 2);
 var adressDefaultY = yPin + (PIN_SIZE_Y / 2);
 setlocation.setAttribute('value', getAddress(adressDefaultX, adressDefaultY));
 
-activeAction.addEventListener('mousedown', function () {
-  openMap();
-  var pinPointerX = xPin + (PIN_SIZE_X / 2);
-  var pinPointerY = yPin + PIN_SIZE_Y + PIN_POINTER_TOP;
-  setlocation.setAttribute('value', getAddress(pinPointerX, pinPointerY));
+activeAction.addEventListener('mousedown', function (evt) {
+  if (evt.which === MOUSEDOWN_KEY) {
+    var pinContainerElement = element.querySelector('.map__pins');
+    pinContainerElement.appendChild(renderPins());
+    openMap();
+    var pinPointerX = xPin + (PIN_SIZE_X / 2);
+    var pinPointerY = yPin + PIN_SIZE_Y + PIN_POINTER_TOP;
+    setlocation.setAttribute('value', getAddress(pinPointerX, pinPointerY));
+  }
 });
 
 activeAction.addEventListener('keydown', function (evt) {
@@ -156,7 +161,7 @@ activeAction.addEventListener('keydown', function (evt) {
 var pinTemplate = document.querySelector('#pin')
   .content.querySelector('.map__pin');
 
-var dataItemFragment = function (item) {
+var getDataItemFragment = function (item) {
   var pin = pinTemplate.cloneNode(true);
   pin.style.left = item.location.x + 'px';
   pin.style.top = item.location.y + 'px';
@@ -169,14 +174,10 @@ var dataItemFragment = function (item) {
 var renderPins = function () {
   var result = document.createDocumentFragment();
   for (var i = 0; i < getObjects().length; i++) {
-    result.appendChild(dataItemFragment(getObjects()[i]));
+    result.appendChild(getDataItemFragment(getObjects()[i]));
   }
   return result;
 };
-
-var pinContainerElem = element.querySelector('.map__pins');
-pinContainerElem.appendChild(renderPins());
-
 
 var onRoomsChange = function () {
 
@@ -189,7 +190,7 @@ var onRoomsChange = function () {
   } else if (rooms.value === '3' && guests.value === '0') {
     guests.setCustomValidity('В комнате может находиться 1 или 2 или 3 гостя');
   } else if (rooms.value === '100' && guests.value !== '0') {
-    guests.setCustomValidity('"Это не жилое помещение');
+    guests.setCustomValidity('Это не жилое помещение');
   } else {
     guests.setCustomValidity('');
   }
