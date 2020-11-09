@@ -24,7 +24,7 @@ body {
    ========================================================================== */
 
 /**
- * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for any HTML5 elements in IE 8/9.
  * Correct `block` display not defined for `details` or `summary` in IE 10/11
  * and Firefox.
  * Correct `block` display not defined for `main` in IE 11.
@@ -71,7 +71,7 @@ audio:not([controls]) {
 
 /**
  * Address `[hidden]` styling not present in IE 8/9/10.
- * Hide the `block-borderlate` element in IE 8/9/11, Safari, and Firefox < 22.
+ * Hide the `block-borderlate` elements in IE 8/9/11, Safari, and Firefox < 22.
  */
 
 [hidden],
@@ -178,7 +178,7 @@ sub {
    ========================================================================== */
 
 /**
- * Remove border when inside `a` element in IE 8/9/10.
+ * Remove border when inside `a` elements in IE 8/9/10.
  */
 
 img {
