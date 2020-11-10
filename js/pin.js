@@ -15,9 +15,9 @@
 
   window.renderPins = function () {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < window.pins.length; i++) {
-      var pinElement = createPin(window.pins[i]);
-      pinElement.addEventListener('click', window.createPinClickListener(window.pins[i]));
+    for (var i = 0; i < window.map.pins.length; i++) {
+      var pinElement = createPin(window.map.pins[i]);
+      pinElement.addEventListener('click', window.map.createPinClickListener(window.map.pins[i]));
       fragment.appendChild(pinElement);
     }
     window.pinContainerElement.appendChild(fragment);

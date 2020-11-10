@@ -20,7 +20,13 @@
   var GUEST = 4;
   var TITLE = 'Заголовок';
   var DESCRIPTION = 'Описание';
-  var COUNT_OBJ = 8;
+  var OBJECTS_COUNT = 8;
+
+  window.data = {
+    getAddress: function (x, y) {
+      return x + ',' + y;
+    }
+  };
 
   var getRandomIntInclusive = function (min, max) {
     min = Math.ceil(min);
@@ -28,33 +34,29 @@
     return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
-  var getRandom = function (arr) {
-    return Math.ceil(Math.random() * arr.length - 1);
+  var getRandom = function (items) {
+    return Math.ceil(Math.random() * items.length - 1);
   };
 
   var getUniqRandomArray = function (array, randomNumber) {
-    var arr = [];
-    while (arr.length < randomNumber) {
+    var items = [];
+    while (items.length < randomNumber) {
       var item = array[getRandomIntInclusive(0, array.length - 1)];
-      if (arr.indexOf(item) === -1) {
-        arr.push(item);
+      if (items.indexOf(item) === -1) {
+        items.push(item);
       }
     }
-    return arr;
+    return items;
   };
 
   var getOption = function (option) {
-    var num = getRandom(option);
-    return option[num];
-  };
-
-  window.getAddress = function (x, y) {
-    return x + ',' + y;
+    var index = getRandom(option);
+    return option[index];
   };
 
   var getAddictions = function (min, addictions) {
-    var num = getRandomIntInclusive(min, addictions.length);
-    return getUniqRandomArray(addictions, num);
+    var index = getRandomIntInclusive(min, addictions.length);
+    return getUniqRandomArray(addictions, index);
   };
 
   var getLocation = function (x, y) {
@@ -63,14 +65,14 @@
 
   window.getObjects = function () {
     var pins = [];
-    for (var i = 0; i < COUNT_OBJ; i++) {
+    for (var i = 0; i < OBJECTS_COUNT; i++) {
       pins[i] = {
         author: {
           avatar: 'img/avatars/user0' + (i + 1) + '.png'
         },
         offer: {
           title: TITLE,
-          address: window.getAddress(getLocation(LOCATION_X_WIDTH, LOCATION_X_HEIGHT), getLocation(LOCATION_Y_MIN, LOCATION_Y_MAX)),
+          address: window.data.getAddress(getLocation(LOCATION_X_WIDTH, LOCATION_X_HEIGHT), getLocation(LOCATION_Y_MIN, LOCATION_Y_MAX)),
           price: PRICE,
           type: getOption(TYPES),
           rooms: ROOMS,

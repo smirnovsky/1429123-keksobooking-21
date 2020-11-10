@@ -71,7 +71,7 @@
   var timeInForm = formVision.querySelector('#timein');
 
   timeInForm .addEventListener('change', function () {
-    timeOutForm.value = timeInForm .value;
+    timeOutForm.value = timeInForm.value;
   });
   timeOutForm.addEventListener('change', function () {
     timeInForm .value = timeOutForm.value;

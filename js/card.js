@@ -56,8 +56,8 @@
 
   window.renderCard = function () {
     var result = document.createDocumentFragment();
-    for (var i = 0; i < window.pins.length; i++) {
-      result.appendChild(getCardItemFragment(window.pins[i]));
+    for (var i = 0; i < window.map.pins.length; i++) {
+      result.appendChild(getCardItemFragment(window.map.pins[i]));
     }
     return result;
   };
